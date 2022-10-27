@@ -17,11 +17,27 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      savedCards: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.buttonCheck = this.buttonCheck.bind(this);
     this.numberCheck = this.numberCheck.bind(this);
     this.isNegative = this.isNegative.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.saveInformations = this.saveInformations.bind(this);
+  }
+
+  onSaveButtonClick() {
+    this.saveInformations();
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: 'normal',
+    });
   }
 
   onInputChange(event) {
@@ -36,6 +52,19 @@ class App extends React.Component {
         this.buttonCheck();
       },
     );
+  }
+
+  saveInformations() {
+    const newObject = {};
+    const keys = Object.keys(this.state);
+    const values = Object.values(this.state);
+    const limite = 8;
+    for (let index = 0; index < limite; index += 1) {
+      newObject[keys[index]] = values[index];
+    }
+    this.setState({
+      savedCards: [].push(newObject),
+    });
   }
 
   isNegative() {
@@ -100,6 +129,7 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           cardName={ cardName }
