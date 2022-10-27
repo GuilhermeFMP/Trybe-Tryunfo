@@ -59,10 +59,14 @@ class App extends React.Component {
   }
 
   trunfoCard() {
-    const { cardTrunfo } = this.state;
-    if (cardTrunfo) {
+    const { savedCards } = this.state;
+    if (savedCards.find((card) => card.cardTrunfo === true)) {
       this.setState({
         hasTrunfo: true,
+      });
+    } else {
+      this.setState({
+        hasTrunfo: false,
       });
     }
   }
@@ -75,9 +79,9 @@ class App extends React.Component {
     for (let index = 0; index < limite; index += 1) {
       newObject[keys[index]] = values[index];
     }
-    this.setState({
-      savedCards: [].push(newObject),
-    });
+    this.setState((previous) => ({
+      savedCards: [...previous.savedCards, newObject],
+    }));
   }
 
   isNegative() {

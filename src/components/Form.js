@@ -28,6 +28,7 @@ class Form extends React.Component {
           data-testid="trunfo-input"
         />
       </label>);
+    const other = <div>Você já tem um Super Trunfo em seu baralho</div>;
     return (
       <form>
         <label htmlFor="text">
@@ -111,7 +112,7 @@ class Form extends React.Component {
         </label>
         {
           hasTrunfo === true
-            ? <p>Você já tem um Super Trunfo em seu baralho</p>
+            ? other
             : trunfo
         }
         <button
