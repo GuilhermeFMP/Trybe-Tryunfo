@@ -25,6 +25,7 @@ class App extends React.Component {
     this.isNegative = this.isNegative.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.saveInformations = this.saveInformations.bind(this);
+    this.trunfoCard = this.trunfoCard.bind(this);
   }
 
   onSaveButtonClick() {
@@ -32,11 +33,14 @@ class App extends React.Component {
     this.setState({
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
+      cardTrunfo: false,
+    }, () => {
+      this.trunfoCard();
     });
   }
 
@@ -52,6 +56,15 @@ class App extends React.Component {
         this.buttonCheck();
       },
     );
+  }
+
+  trunfoCard() {
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo) {
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
   }
 
   saveInformations() {
